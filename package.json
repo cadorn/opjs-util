@@ -1,0 +1,18 @@
+{
+  "name": "opjs-util",
+  "dependencies": {
+    "bodec": "~0.0.1",
+    "chai": "^1.10.0",
+    "node-forge": "^0.6.20",
+    "q": "^1.1.2",
+    "smi.cli": "0.x"
+  },
+  "config": {
+    "pio.deploy.converter": {
+      "name": "nodejs-lib"
+    }
+  },
+  "scripts": {
+    "install": "cd client ; npm install --unsafe-perm ; cd .. ; cd common ; npm install --unsafe-perm ; cd .. ; cd server ; npm install --unsafe-perm ; cd .."
+  }
+}

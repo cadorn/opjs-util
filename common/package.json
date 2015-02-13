@@ -1,0 +1,19 @@
+{
+	"name": "opjs-util-common",
+	"version": "0.1.0",
+	"private": true,
+	"mappings": {
+		"bodec": "../node_modules/bodec",
+	    "chai": "../node_modules/chai",
+	    "node-forge": "../node_modules/node-forge",
+	    "q": "../node_modules/q"
+	},
+    "scripts": {
+	    "install": "../node_modules/.bin/smi install"
+	},
+	"config": {
+		"smi.cli": {
+			"packagesDirectory": "node_modules"
+		}
+	}
+}

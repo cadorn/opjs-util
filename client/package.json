@@ -1,0 +1,34 @@
+{
+  "name": "opjs-util-client",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    "bundles": {
+      "crypto-worker.js": "./crypto-worker.js"
+    }
+  },
+  "mappings": {
+    "common": "../common",
+    "bodec": "../node_modules/bodec",
+    "chai": "../node_modules/chai",
+    "node-forge": "../node_modules/node-forge",
+    "q": "../node_modules/q"
+  },
+  "dependencies": {
+    "URIjs": "^1.14.1",
+    "eventemitter2": "^0.4.14",
+    "jquery": "^2.1.3",
+    "whatwg-fetch": "^0.6.1"
+  },
+  "scripts": {
+    "install": "../node_modules/.bin/smi install"
+  },
+  "config": {
+    "smi.cli": {
+      "packagesDirectory": "node_modules"
+    },
+    "pio.deploy.converter": {
+      "name": "nodejs-lib"
+    }
+  }
+}

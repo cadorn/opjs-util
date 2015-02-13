@@ -1,0 +1,16 @@
+{
+	"name": "opjs-util-server",
+	"version": "0.1.0",
+	"private": true,
+	"mappings": {
+		"common": "../common"
+	},
+    "scripts": {
+	    "install": "../node_modules/.bin/smi install"
+	},
+	"config": {
+		"smi.cli": {
+			"packagesDirectory": "node_modules"
+		}
+	}
+}
