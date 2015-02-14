@@ -26,3 +26,27 @@ module.exports.fetchJSON = function (uri) {
 	});
 	return deferred.promise;
 }
+
+module.exports.postJSON = function (uri, payloadString) {
+	var deferred = Q.defer();
+	FETCH(uri, {
+	    method: "post",
+	    headers: {
+	        'Accept': 'application/json',
+	        'Content-Type': 'application/json'
+	    },
+	    body: payloadString
+	}).then(function(response) {
+	    if (response.status !== 200) {
+	        var err = new Error("Got status " + response.status);
+	        err.code = response.status;
+	        throw err;
+	    }
+	    return response.json();
+	}).then(function(response) {
+		return deferred.resolve(response);
+	}).catch(function(err) {
+	    return deferred.reject(err);
+	});
+	return deferred.promise;
+}
