@@ -8,12 +8,18 @@
     "request": "^2.53.0",
     "smi.cli": "0.x"
   },
+  "mappings": {
+    "websocket-codec": "https://github.com/openpeer/websocket-codec/archive/e2926c2da54b677dcc2b3cfdb9ce0f56f281c214.tar.gz"
+  },
   "config": {
+    "smi.cli": {
+      "packagesDirectory": "node_modules"
+    },
     "pio.deploy.converter": {
       "name": "nodejs-lib"
     }
   },
   "scripts": {
-    "install": "cd client ; npm install --unsafe-perm ; cd .. ; cd common ; npm install --unsafe-perm ; cd .. ; cd server ; npm install --unsafe-perm ; cd .."
+    "install": "./node_modules/.bin/smi install ; cd client ; npm install --unsafe-perm ; cd .. ; cd common ; npm install --unsafe-perm ; cd .. ; cd server ; npm install --unsafe-perm ; cd .."
   }
 }
