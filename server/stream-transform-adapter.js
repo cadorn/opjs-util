@@ -5,15 +5,31 @@ var Transform = require('stream').Transform;
 module.exports = adapter;
 
 function adapter(transform) {
+
+  console.log("SOCKET START");
+
+  var streamEnded = false;
   var piece = new Transform();
 
   var write = transform(function (out) {
-    // console.log("out", pretty(out));
+
     if (out === undefined) {
-      // Is this right?  I mean to tell node the stream is done.
+      console.log("SOCKET END");
+      streamEnded = true;
       piece.end();
     }
+    else
+    if (streamEnded) {
+      console.log("IGNORE SEND OUT", pretty(out), "[[", out, "]]", "DUE TO SOCKET END");
+      if (typeof out.length === 8) {
+        for (var i = 0, l = out.length; i < l; i++) {
+          console.log("SEND OUT out[" + i + "]", out[i]);
+        }
+      }
+    }
     else {
+      console.log("SEND OUT", pretty(out), "[[", out, "]]");
+
       // Do we need to do anything special when out is an object and not a buffer
       piece.push(out);
     }
@@ -39,6 +55,14 @@ function adapter(transform) {
 
 function pretty(data) {
   if (!data) return data;
+  if (data.length === 8) {
+    // assuming header
+    var line = [];
+    for (var i = 0, l = data.length; i < l; i++) {
+      line.push(data[i]);
+    }
+    return line.join(" ");
+  }
   for (var i = 0, l = data.length; i < l; i++) {
     var byte = data[i];
     if ((byte < 0x20 && byte !== 0x0d && byte !== 0x0a && byte !== 0x09) || byte >= 0x80) return data;

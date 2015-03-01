@@ -139,6 +139,7 @@ function decoder(emit, hasChannel) {
     // We need to store the output value before resetting...
     var object;
     if (hasChannel) {
+      console.log("RECEIVED ON CHANNEL [" + channel + "]:", body.length);
       object = {
         channel: channel,
         body: body
@@ -184,6 +185,7 @@ function encoder(emit, hasChannel) {
       }
       channel = object.channel;
       body = object.body;
+      console.log("SENDING ON CHANNEL [" + channel + "]:", body.length);
     }
     else {
       if (!bodec.isBinary(object)) {
