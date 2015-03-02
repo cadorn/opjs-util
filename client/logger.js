@@ -4,11 +4,23 @@ const $ = require("./jquery");
 const RANDOM = require("./random");
 
 
-exports.loadRemote = function (host) {
+exports.loadRemote = function (options) {
+
+    var host = options;
+    var api = {
+        "logger": "/tools/logger/logger.js",
+        "record": "/record"
+    };
+    if (typeof host === "object") {
+        host = options.host;
+        for (var name in options.api) {
+            api[name] = options.api[name];
+        }
+    }
 
     return Q.denodeify(function (callback) {
 
-        $('<script type="text/javascript" src="//' + host + '/tools/logger/logger.js"></script>').appendTo("BODY");
+        $('<script type="text/javascript" src="//' + host + api.logger + '"></script>').appendTo("BODY");
 
         var testInterval = setInterval(function () {
             if (!window.__LOGGER) return;                   
@@ -24,7 +36,7 @@ exports.loadRemote = function (host) {
         }, 5 * 1000);
     })().then(function () {
 
-        window.__LOGGER.setUrl("//" + host + "/tools/logger/record");
+        window.__LOGGER.setUrl("//" + host + api.record);
         window.__LOGGER.setChannel("identity-hcs-api-logger");
 
         return window.__LOGGER;
