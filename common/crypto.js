@@ -32,7 +32,11 @@ var HMAC256 = exports.HMAC256 = function (secret, string) {
   return hmac.digest();
 }
 
+exports.privateKeyToPem = PKI.privateKeyToPem;
+exports.publicKeyToPem = PKI.publicKeyToPem;
+
 exports.privateKeyFromPem = PKI.privateKeyFromPem;
+exports.publicKeyFromPem = PKI.publicKeyFromPem;
 
 exports.privateKeyFromDer = function (der) {
   return FORGE.pki.privateKeyFromAsn1(ASN1.fromDer(FORGE.util.decode64(der)));

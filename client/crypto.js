@@ -20,8 +20,8 @@ exports.generateKeyPair = function (size) {
     worker.on("message", function (message) {
         if (message.method === "generateKeyPair_worker") {
             return deferred.resolve({
-                privateKey: PKI.privateKeyFromPem(message.response.privatePem),
-                publicKey: PKI.publicKeyFromPem(message.response.publicPem)
+                privateKey: CRYPTO.privateKeyFromPem(message.response.privatePem),
+                publicKey: CRYPTO.publicKeyFromPem(message.response.publicPem)
             });
         }
     });
@@ -41,8 +41,8 @@ exports.generateKeyPair = function (size) {
 exports.generateKeyPair_worker = function (size) {
   	var pair = CRYPTO.generateKeyPair(size);
   	return {
-        privatePem: FORGE.pki.privateKeyToPem(pair.privateKey),
-        publicPem: FORGE.pki.publicKeyToPem(pair.publicKey)
+        privatePem: CRYPTO.privateKeyToPem(pair.privateKey),
+        publicPem: CRYPTO.publicKeyToPem(pair.publicKey)
     };
 }
 
