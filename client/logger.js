@@ -4,11 +4,11 @@ const $ = require("./jquery");
 const RANDOM = require("./random");
 
 
-exports.loadRemote = function (host) {
+exports.loadRemote = function (config) {
 
     return Q.denodeify(function (callback) {
 
-        $('<script type="text/javascript" src="//' + host + '/tools/logger/logger.js"></script>').appendTo("BODY");
+        $('<script type="text/javascript" src="//' + config.host + config.api.logger + '"></script>').appendTo("BODY");
 
         var testInterval = setInterval(function () {
             if (!window.__LOGGER) return;                   
@@ -24,7 +24,7 @@ exports.loadRemote = function (host) {
         }, 5 * 1000);
     })().then(function () {
 
-        window.__LOGGER.setUrl("//" + host + "/tools/logger/record");
+        window.__LOGGER.setUrl('//' + config.host + config.api.record);
         window.__LOGGER.setChannel("identity-hcs-api-logger");
 
         return window.__LOGGER;
